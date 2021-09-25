@@ -1,4 +1,0 @@
-package fcl
-
-class APIClient {
-}
