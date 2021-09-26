@@ -19,6 +19,8 @@ class RetrofitClientTest {
         observer.assertNoErrors()
         val res = observer.values().first()
         assertEquals(res.status, "PENDING")
+        assertEquals(res.updates?.method, "HTTP/POST")
+        assertEquals(res.local?.method, "VIEW/IFRAME")
     }
 
     @Test

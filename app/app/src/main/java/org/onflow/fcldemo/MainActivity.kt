@@ -14,14 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val client = Client("http://10.0.2.2:3000/api/")
-        client.authenticateWithResult(20)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                findViewById<TextView>(R.id.helloLabel).text = it.data?.addr
-            }, {
-                Log.e("ERR", it.localizedMessage)
-            })
+        val addressLabel = findViewById<TextView>(R.id.address)
+
+        val address = intent.getStringExtra(EXTRA_ADDRESS)
+        addressLabel.text = address
     }
 }
