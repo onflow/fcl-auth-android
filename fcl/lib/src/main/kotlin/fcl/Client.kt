@@ -1,9 +1,9 @@
 package fcl
 
 import fcl.models.PollingResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import java.lang.Error
-import java.util.*
+import java.util.Timer
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.schedule
 
@@ -20,7 +20,7 @@ class Client (url: String) {
 
     fun authenticateWithResult(secondsTimeout: Long): Observable<PollingResponse> {
         return Observable.create { o ->
-            Timer().schedule(secondsTimeout * 1000) {
+            val timeout = Timer().schedule(secondsTimeout * 1000) {
                 o.onError(Error("timeout trying to authenticate"))
             }
 
@@ -32,6 +32,7 @@ class Client (url: String) {
                     .subscribe{
                         o.onNext(it)
                         o.onComplete()
+                        timeout.cancel()
                     }
             }
         }

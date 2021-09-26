@@ -2,11 +2,11 @@ package fcl
 
 import com.google.gson.GsonBuilder
 import fcl.models.PollingResponse
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.http.GET
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.POST
@@ -35,7 +35,7 @@ interface RetrofitClient {
             val retrofit = Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(client)
                 .build()
 
