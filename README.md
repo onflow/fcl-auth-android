@@ -1,7 +1,7 @@
 # FCL Android
 
 FCL Android is a Kotlin library for the [Flow Client Library (FCL)](https://docs.onflow.org/fcl/)
-that enables Flow wallet authentication on iOS devices.
+that enables Flow wallet authentication on Android devices.
 
 ## Demo
 
