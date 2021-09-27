@@ -9,8 +9,6 @@ The [demo app](/app) in this project shows how to use FCL inside an Android app.
 
 <img src="/app/fcl-android-demo-dapper.gif" width="200" />
 
-![demo-dapper](/app/fcl-android-demo-dapper.gif | width=100 )
-
 ## Installation
 
 You can download the latest version from the [GitHub Apache Maven registry](https://github.com/onflow/fcl-android/packages).
