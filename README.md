@@ -30,7 +30,7 @@ You can download the latest version from the [GitHub Apache Maven registry](http
 <dependency>
   <groupId>org.onflow.fcl</groupId>
   <artifactId>fcl-android</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.4</version>
 </dependency>
 ```
 
