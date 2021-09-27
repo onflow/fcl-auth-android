@@ -1,18 +1,18 @@
-package fcl
+package org.onflow.fcl.android
 
 import com.google.gson.GsonBuilder
-import fcl.models.PollingResponse
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.onflow.fcl.android.models.PollingResponse
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.http.GET
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Url
 
-interface RetrofitClient {
+internal interface RetrofitClient {
     @GET
     fun getAuthentication(@Url url: String): Observable<PollingResponse>
 
@@ -29,7 +29,7 @@ interface RetrofitClient {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
 
             val client = OkHttpClient.Builder()
-                //.addInterceptor(interceptor)
+                // .addInterceptor(interceptor)
                 .build()
 
             val retrofit = Retrofit.Builder()

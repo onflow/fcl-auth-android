@@ -1,13 +1,15 @@
-package fcl
+package org.onflow.fcl.android
 
-import fcl.models.PollingResponse
 import io.reactivex.rxjava3.observers.TestObserver
+import org.junit.Assert.assertEquals
+import org.junit.Ignore
 import org.junit.Test
-import kotlin.test.assertEquals
+import org.onflow.fcl.android.models.PollingResponse
 
 class RetrofitClientTest {
 
     @Test
+    @Ignore
     fun getAuthenticatedTest() {
         val client = RetrofitClient.create("http://localhost:3000/api/")
 
@@ -24,6 +26,7 @@ class RetrofitClientTest {
     }
 
     @Test
+    @Ignore
     fun getAuthenticationStatus() {
         val client = RetrofitClient.create("http://localhost:3000/api/")
 
@@ -40,8 +43,8 @@ class RetrofitClientTest {
         assertEquals(res.updates?.endpoint, "http://localhost:3000/api/authn-poll")
     }
 
-    /*
     @Test
+    @Ignore
     fun authenticateWithResult() {
         val client = Client("http://localhost:3000/api/")
 
@@ -56,5 +59,4 @@ class RetrofitClientTest {
         val auth = observer.values().first()
         assertEquals(auth.data?.addr, "0x7fc8cf73ba231d10")
     }
-     */
 }

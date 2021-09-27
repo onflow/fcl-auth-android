@@ -1,0 +1,31 @@
+apply plugin: 'maven-publish'
+
+def getVersionName = { ->
+    return "0.0.1" // Replace with current version
+}
+
+def getArtificatId = { ->
+    return "fcl-android"
+}
+
+publishing {
+    publications {
+        fclandroid(MavenPublication) {
+            groupId 'org.onflow.fcl'
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("$buildDir/outputs/aar/lib-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/onflow/fcl-android")
+            credentials {
+                username = System.getenv("GPR_USER")
+                password = System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+}

@@ -3,8 +3,16 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/onflow/fcl-android")
+            credentials {
+                username = System.getenv("GPR_USER")
+                password = System.getenv("GPR_API_KEY")
+            }
+        }
     }
 }
+
 rootProject.name = "FCL Demo"
 include ':app'
