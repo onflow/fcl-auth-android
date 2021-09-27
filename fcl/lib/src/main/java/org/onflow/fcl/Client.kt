@@ -1,14 +1,13 @@
-package fcl
+package org.onflow.fcl
 
-import fcl.models.PollingResponse
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.ObservableEmitter
+import org.onflow.fcl.models.PollingResponse
 import java.lang.Error
-import java.util.*
+import java.util.Timer
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.schedule
 
-class Client (url: String) {
+internal class Client(url: String) {
     private val api: RetrofitClient = RetrofitClient.create(url)
 
     fun requestAuthentication(): Observable<PollingResponse> {
@@ -21,7 +20,7 @@ class Client (url: String) {
 
     fun authenticateWithResult(secondsTimeout: Long): Observable<PollingResponse> {
         return Observable.create { o ->
-            requestAuthentication().subscribe{
+            requestAuthentication().subscribe {
                 getAuthenticationResult(it, secondsTimeout)
                     .subscribe(o::onNext, o::onError)
             }
@@ -37,7 +36,13 @@ class Client (url: String) {
                 observable.onError(Error("timeout trying to authenticate"))
             }
 
-            getAuthentication(authentication.updates!!.endpoint)
+            val uri = makeServiceUrl(
+                authentication.updates!!.endpoint,
+                authentication.updates!!.params,
+                "https://foo.com",
+            )
+
+            getAuthentication(uri.toString())
                 .repeatWhen { it.delay(500, TimeUnit.MILLISECONDS) }
                 .takeUntil { it.status != "PENDING" }
                 .filter { it.status != "PENDING" }
@@ -48,5 +53,4 @@ class Client (url: String) {
                 }
         }
     }
-
 }

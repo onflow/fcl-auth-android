@@ -1,13 +1,13 @@
-package fcl.models
+package org.onflow.fcl.models
 
-data class PollingResponse (
+data class PollingResponse(
     val status: String,
     val data: PollingData?,
     val updates: Service?,
     val local: Service?
 )
 
-data class PollingData (
+data class PollingData(
     val addr: String,
     val services: Array<Service>?
 )
@@ -15,5 +15,6 @@ data class PollingData (
 data class Service(
     val type: String?,
     val method: String?,
-    val endpoint: String
+    val endpoint: String,
+    var params: Map<String, String>
 )
