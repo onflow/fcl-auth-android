@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="">
-    <img src="./fcl-android.svg" alt="Logo" width="270" height="auto">
+    <img src="./fcl-android.svg" alt="Logo" width="400" height="auto">
   </a>
 
   <p align="center">
