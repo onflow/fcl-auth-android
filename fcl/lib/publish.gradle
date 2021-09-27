@@ -1,19 +1,11 @@
 apply plugin: 'maven-publish'
 
-def getVersionName = { ->
-    return "0.0.1" // Replace with current version
-}
-
-def getArtificatId = { ->
-    return "fcl-android"
-}
-
 publishing {
     publications {
         fclandroid(MavenPublication) {
-            groupId 'org.onflow.fcl'
-            artifactId getArtificatId()
-            version getVersionName()
+            groupId = 'org.onflow.fcl'
+            artifactId = 'fcl-android'
+            version = '0.0.1'
             artifact("$buildDir/outputs/aar/lib-release.aar")
         }
     }
