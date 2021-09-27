@@ -30,7 +30,7 @@ internal interface RetrofitClient {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
 
             val client = OkHttpClient.Builder()
-                //.addInterceptor(interceptor)
+                // .addInterceptor(interceptor)
                 .build()
 
             val retrofit = Retrofit.Builder()
@@ -44,7 +44,6 @@ internal interface RetrofitClient {
         }
     }
 }
-
 
 object NFTs {
     private val api = RetrofitClient.create("https://flow-nft-api-mock.vercel.app/api/v1/")

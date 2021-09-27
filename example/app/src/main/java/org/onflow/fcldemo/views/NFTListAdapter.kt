@@ -1,28 +1,20 @@
 package org.onflow.fcldemo.views
 
 import android.app.Activity
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.Observer
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import nft.NFT
 import org.onflow.fcldemo.R
-import java.io.InputStream
 import java.net.URL
-
 
 class NFTListAdapter(private val context: Activity, private val nfts: Array<NFT>) : BaseAdapter() {
 
