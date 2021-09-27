@@ -10,23 +10,23 @@ import kotlin.concurrent.schedule
 internal class Client(url: String) {
     private val api: RetrofitClient = RetrofitClient.create(url)
 
+    /**
+     * Request new authentication process
+     */
     fun requestAuthentication(): Observable<PollingResponse> {
         return api.requestAuthentication()
     }
 
+    /**
+     * Get authentication response
+     */
     fun getAuthentication(updateEndpoint: String): Observable<PollingResponse> {
         return api.getAuthentication(updateEndpoint)
     }
 
-    fun authenticateWithResult(secondsTimeout: Long): Observable<PollingResponse> {
-        return Observable.create { o ->
-            requestAuthentication().subscribe {
-                getAuthenticationResult(it, secondsTimeout)
-                    .subscribe(o::onNext, o::onError)
-            }
-        }
-    }
-
+    /**
+     * Get authentication result with finality
+     */
     fun getAuthenticationResult(
         authentication: PollingResponse,
         secondsTimeout: Long
@@ -36,16 +36,20 @@ internal class Client(url: String) {
                 observable.onError(Error("timeout trying to authenticate"))
             }
 
+            if (authentication.updates == null) {
+                observable.onError(Throwable("authentication response must include updates"))
+            }
+
             val uri = makeServiceUrl(
                 authentication.updates!!.endpoint,
-                authentication.updates!!.params,
+                authentication.updates.params,
                 "https://foo.com",
             )
 
             getAuthentication(uri.toString())
-                .repeatWhen { it.delay(500, TimeUnit.MILLISECONDS) }
-                .takeUntil { it.status != "PENDING" }
-                .filter { it.status != "PENDING" }
+                .repeatWhen { it.delay(1000, TimeUnit.MILLISECONDS) }
+                .takeUntil { !it.isPending() }
+                .filter { !it.isPending() }
                 .subscribe {
                     observable.onNext(it)
                     observable.onComplete()

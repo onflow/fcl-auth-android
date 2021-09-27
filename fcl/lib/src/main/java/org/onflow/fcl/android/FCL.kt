@@ -1,10 +1,11 @@
 package org.onflow.fcl.android
 
 import android.content.Context
-import android.util.Log
 import androidx.browser.customtabs.CustomTabsIntent
+import org.onflow.fcl.android.models.ResponseStatus
 import java.net.URL
-import kotlin.collections.HashMap
+
+const val DEFAULT_TIMEOUT: Long = 300
 
 data class AppInfo(val title: String, val icon: URL)
 
@@ -16,6 +17,19 @@ interface Provider {
     val title: String
     val method: ServiceMethod
     val endpoint: URL
+}
+
+data class Providers(
+    private val providers: ArrayList<Provider> = ArrayList()
+) {
+    fun add(provider: Provider) {
+        providers.add(provider)
+    }
+
+    fun get(provider: Provider): Provider {
+        return providers.first { it.endpoint == provider.endpoint }
+    }
+
 }
 
 data class CustomProvider(
@@ -38,54 +52,48 @@ enum class DefaultProvider(
         "Blocto",
         ServiceMethod.HTTP_POST,
         URL("https://flow-wallet.blocto.app/api/flow/"),
-    );
+    )
 }
 
-data class AuthnResponse(val address: String)
+data class AuthnResponse(
+    val address: String?,
+    val status: ResponseStatus,
+    val reason: String?
+)
 
+/**
+ * Flow Client used for interactions with wallet providers
+ *
+ * @param [appInfo] application info used when interacting with wallets
+ */
 class FCL(private val appInfo: AppInfo) {
 
-    private val providers: HashMap<String, Provider> = HashMap()
+    private val providers = Providers()
 
-    fun addProvider(id: String, provider: Provider) {
-        this.providers.put(id, provider)
-    }
-
+    /**
+     * Starts a new authentication request for the provider.
+     * Authentication process includes opening a browser with provided context for the user to sign in
+     *
+     * @param [context] application context used for opening a browser
+     * @param [provider] provider used for authentication
+     * @param [onComplete] callback function called on completion with response data
+     */
     fun authenticate(
         context: Context,
-        providerId: String,
+        provider: Provider,
         onComplete: (AuthnResponse) -> Unit,
     ) {
-        // TODO: handle missing provider
-        val provider = this.providers.get(providerId)!!
+        val client = Client(providers.get(provider).toString())
 
-        val client = Client(provider.endpoint.toString())
-
-        client.requestAuthentication().subscribe({
-            auth ->
-            if (auth.local == null) {
-                throw Error("not provided login iframe")
-            }
-
-            val service = auth.local
+        client.requestAuthentication().subscribe({ auth ->
+            val service = auth.local ?: throw Exception("not provided login iframe")
 
             this.openLoginTab(context, service.endpoint, service.params)
 
-            client.getAuthenticationResult(auth, 300).subscribe({
-                Log.e("#AUTH", it.status)
-
-                // todo refactor to isApproved()
-                if (it.status == "APPROVED") {
-                    onComplete(AuthnResponse(it.data!!.addr))
-                }
-            }, {
-                err ->
-                Log.e("#AUTH RESULT ERR", err.localizedMessage)
-            })
-        }, {
-            err ->
-            Log.e("#AUTH SESSION ERR", err.localizedMessage)
-        })
+            client.getAuthenticationResult(auth, DEFAULT_TIMEOUT).subscribe({
+                onComplete(AuthnResponse(it.data?.addr, it.status, it.reason))
+            }, { err -> throw Exception(err) })
+        }, { err -> throw Exception(err) })
     }
 
     private fun openLoginTab(
