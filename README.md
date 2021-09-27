@@ -13,7 +13,7 @@
 <br />
 <br />
 
-FCL Android is a Kotlin library for the [Flow Client Library (FCL)](https://docs.onflow.org/fcl/)
+FCL Auth Android is a Kotlin library for the [Flow Client Library (FCL)](https://docs.onflow.org/fcl/)
 that enables Flow wallet authentication on Android devices.
 
 ## Demo
@@ -29,7 +29,7 @@ You can download the latest version from the [GitHub Apache Maven registry](http
 ```xml
 <dependency>
   <groupId>org.onflow.fcl</groupId>
-  <artifactId>fcl-android</artifactId>
+  <artifactId>fcl-auth-android</artifactId>
   <version>0.1.0</version>
 </dependency>
 ```
@@ -45,9 +45,9 @@ FCL Android ships with several built-in wallet providers (Dapper, Blocto),
 but you can also define custom wallet providers if needed.
 
 ```kotlin
-import org.onflow.fcl.android.AppInfo
-import org.onflow.fcl.android.DefaultProvider
-import org.onflow.fcl.android.FCL
+import org.onflow.fcl.android.auth.AppInfo
+import org.onflow.fcl.android.auth.DefaultProvider
+import org.onflow.fcl.android.auth.FCL
 
 val fcl = FCL(
     AppInfo(
