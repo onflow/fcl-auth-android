@@ -5,10 +5,10 @@
   </a>
 
   <p align="center">
-    <i>Android Kotlin library for the Flow Client Library FCL</i>
+    <i>Android Kotlin library for the Flow Client Library (FCL).</i>
     <br />
     <br />
-    <a href="https://github.com/onflow/flowfcl-android/issues">Report a Bug</a>
+    <a href="https://github.com/onflow/fcl-android/issues">Report a Bug</a>
 </p>
 <br />
 <br />
@@ -20,7 +20,7 @@ that enables Flow wallet authentication on Android devices.
 
 The [example app](/example) in this project demonstrates how to use FCL inside an Android app.
 
-<img src="/app/fcl-android-demo-dapper.gif" width="200" />
+<img src="/example/fcl-android-demo-dapper.gif" width="200" />
 
 ## Installation
 
