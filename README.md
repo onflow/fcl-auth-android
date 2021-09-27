@@ -43,8 +43,8 @@ val fcl = FCL(
     )
 )
 
-fcl.addProvider("dapper", DefaultProvider.DAPPER)
-fcl.addProvider("blocto", DefaultProvider.BLOCTO)
+fcl.providers.add(DefaultProvider.DAPPER)
+fcl.providers.add(DefaultProvider.BLOCTO)
 ```
 
 ## Authenticate 
@@ -53,7 +53,7 @@ fcl.addProvider("blocto", DefaultProvider.BLOCTO)
 // use inside of an activity class
 val context: android.content.Context = this
 
-fcl.authenticate(context, "dapper") { response ->
+fcl.authenticate(context, DefaultProvider.DAPPER) { response ->
   System.out.println(response.address)
 }
 ```
@@ -61,5 +61,16 @@ fcl.authenticate(context, "dapper") { response ->
 The `response` variable is of type `AuthnResponse`, which contains the user's wallet address:
 
 ```kotlin
-data class AuthnResponse(val address: String)
+/**
+ * Authentication response
+ * 
+ * @property [address] address of the authenticated account
+ * @property [status] status of the authentication (approved or declined)
+ * @property [reason] if authentication is declined this property will contain more description
+ */
+data class AuthnResponse(
+    val address: String?,
+    val status: ResponseStatus,
+    val reason: String?
+)
 ```
