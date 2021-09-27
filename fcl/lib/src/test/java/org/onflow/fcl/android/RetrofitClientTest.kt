@@ -1,10 +1,10 @@
-package org.onflow.fcl
+package org.onflow.fcl.android
 
 import io.reactivex.rxjava3.observers.TestObserver
 import org.junit.Assert.assertEquals
 import org.junit.Ignore
 import org.junit.Test
-import org.onflow.fcl.models.PollingResponse
+import org.onflow.fcl.android.models.PollingResponse
 
 class RetrofitClientTest {
 

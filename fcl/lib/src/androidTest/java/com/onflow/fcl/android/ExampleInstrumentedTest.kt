@@ -1,4 +1,4 @@
-package com.onflow.fcl
+package com.onflow.fcl.android
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry

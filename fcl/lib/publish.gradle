@@ -5,13 +5,13 @@ def getVersionName = { ->
 }
 
 def getArtificatId = { ->
-    return "fcl_android"
+    return "fcl-android"
 }
 
 publishing {
     publications {
-        fcl(MavenPublication) {
-            groupId 'org.onflow'
+        fclandroid(MavenPublication) {
+            groupId 'org.onflow.fcl'
             artifactId getArtificatId()
             version getVersionName()
             artifact("$buildDir/outputs/aar/lib-release.aar")

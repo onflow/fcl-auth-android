@@ -1,4 +1,4 @@
-package org.onflow.fcl.models
+package org.onflow.fcl.android.models
 
 data class PollingResponse(
     val status: String,

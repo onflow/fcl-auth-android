@@ -1,10 +1,10 @@
-package org.onflow.fcl
+package org.onflow.fcl.android
 
 import com.google.gson.GsonBuilder
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.onflow.fcl.models.PollingResponse
+import org.onflow.fcl.android.models.PollingResponse
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

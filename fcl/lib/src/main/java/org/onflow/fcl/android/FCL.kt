@@ -1,4 +1,4 @@
-package org.onflow.fcl
+package org.onflow.fcl.android
 
 import android.content.Context
 import android.util.Log

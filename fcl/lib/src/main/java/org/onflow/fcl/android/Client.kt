@@ -1,7 +1,7 @@
-package org.onflow.fcl
+package org.onflow.fcl.android
 
 import io.reactivex.rxjava3.core.Observable
-import org.onflow.fcl.models.PollingResponse
+import org.onflow.fcl.android.models.PollingResponse
 import java.lang.Error
 import java.util.Timer
 import java.util.concurrent.TimeUnit

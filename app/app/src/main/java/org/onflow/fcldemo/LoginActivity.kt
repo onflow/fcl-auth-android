@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.Window
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import org.onflow.fcl.AppInfo
-import org.onflow.fcl.AuthnResponse
-import org.onflow.fcl.DefaultProvider
-import org.onflow.fcl.FCL
+import org.onflow.fcl.android.AppInfo
+import org.onflow.fcl.android.AuthnResponse
+import org.onflow.fcl.android.DefaultProvider
+import org.onflow.fcl.android.FCL
 import java.net.URL
 
 const val EXTRA_ADDRESS = "org.onflow.demo.ADDRESS"
