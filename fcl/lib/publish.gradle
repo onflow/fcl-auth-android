@@ -5,7 +5,7 @@ publishing {
         fclandroid(MavenPublication) {
             groupId = 'org.onflow.fcl'
             artifactId = 'fcl-android'
-            version = '0.0.2'
+            version = '0.0.5'
             artifact("$buildDir/outputs/aar/lib-release.aar")
         }
     }

@@ -27,9 +27,8 @@ data class Providers(
     }
 
     fun get(provider: Provider): Provider {
-        return providers.first { it.endpoint == provider.endpoint }
+        return providers.first { it.endpoint.equals(provider.endpoint) }
     }
-
 }
 
 data class CustomProvider(
@@ -68,7 +67,7 @@ data class AuthnResponse(
  */
 class FCL(private val appInfo: AppInfo) {
 
-    private val providers = Providers()
+    val providers = Providers()
 
     /**
      * Starts a new authentication request for the provider.
@@ -83,7 +82,7 @@ class FCL(private val appInfo: AppInfo) {
         provider: Provider,
         onComplete: (AuthnResponse) -> Unit,
     ) {
-        val client = Client(providers.get(provider).toString())
+        val client = Client(providers.get(provider).endpoint.toString())
 
         client.requestAuthentication().subscribe({ auth ->
             val service = auth.local ?: throw Exception("not provided login iframe")

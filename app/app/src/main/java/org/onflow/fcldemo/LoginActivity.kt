@@ -19,13 +19,13 @@ class LoginActivity : AppCompatActivity() {
 
         val fcl = FCL(
             AppInfo(
-                title = "FCL Demo App",
-                icon = URL("https://cryptologos.cc/logos/flow-flow-logo.png"),
+                "FCL Demo App",
+                URL("https://cryptologos.cc/logos/flow-flow-logo.png"),
             )
         )
 
-        fcl.addProvider("dapper", DefaultProvider.DAPPER)
-        fcl.addProvider("blocto", DefaultProvider.BLOCTO)
+        fcl.providers.add(DefaultProvider.DAPPER)
+        fcl.providers.add(DefaultProvider.BLOCTO)
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val dapperLogin = findViewById<Button>(R.id.login_dapper)
 
         dapperLogin.setOnClickListener {
-            fcl.authenticate(this, "dapper") { response ->
+            fcl.authenticate(this, DefaultProvider.DAPPER) { response ->
                 launchProfile(response)
             }
         }
@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         val bloctoLogin = findViewById<Button>(R.id.login_blocto)
 
         bloctoLogin.setOnClickListener {
-            fcl.authenticate(this, "blocto") { response ->
+            fcl.authenticate(this, DefaultProvider.BLOCTO) { response ->
                 launchProfile(response)
             }
         }
