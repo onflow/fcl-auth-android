@@ -111,5 +111,6 @@ class FCL(private val appInfo: AppInfo) {
 
         val tabIntent = CustomTabsIntent.Builder().build()
         tabIntent.launchUrl(context, uri)
+
     }
 }
