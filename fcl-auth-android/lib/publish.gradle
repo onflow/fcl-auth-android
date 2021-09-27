@@ -1,0 +1,23 @@
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        fclandroid(MavenPublication) {
+            groupId = 'org.onflow.fcl'
+            artifactId = 'fcl-auth-android'
+            version = '0.1.0'
+            artifact("$buildDir/outputs/aar/lib-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/onflow/fcl-auth-android")
+            credentials {
+                username = System.getenv("GPR_USER")
+                password = System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+}
