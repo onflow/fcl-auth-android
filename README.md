@@ -5,9 +5,11 @@ that enables Flow wallet authentication on iOS devices.
 
 ##
 
-The [demo app](/app) in this project shows how to use FCL Android.
+The [demo app](/app) in this project shows how to use FCL inside an Android app.
 
-TODO: LINK HERE
+<img src="/app/fcl-android-demo-dapper.gif" width="200" />
+
+![demo-dapper](/app/fcl-android-demo-dapper.gif | width=100 )
 
 ## Installation
 
