@@ -12,9 +12,9 @@ import retrofit2.http.Query
 
 data class Owner(val owner: String, val nfts: Array<NFT>)
 data class NFT(val id: String, val metadata: NFTMetadata)
-data class NFTMetadata(val title: String, val image: String, val topShotPlay: NFTPlay)
+data class NFTMetadata(val title: String, val image: String, val top_shot_play: NFTPlay)
 data class NFTPlay(val stats: NFTStats)
-data class NFTStats(val teamAtMoment: String, val playerName: String, val jerseyNumber: String)
+data class NFTStats(val team_at_moment: String, val player_name: String, val jersey_number: String)
 
 internal interface RetrofitClient {
     @GET("nfts")

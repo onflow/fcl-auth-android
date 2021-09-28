@@ -31,10 +31,10 @@ class NFTListAdapter(private val context: Activity, private val nfts: Array<NFT>
         val team = item.findViewById<TextView>(R.id.nftTeam)
 
         val nft = nfts.get(position)
-        Log.e("#EE", nft.toString() + " " + nft.metadata.topShotPlay.toString())
+        Log.e("#EE", nft.toString() + " " + nft.metadata.top_shot_play.toString())
 
         title.text = nft.metadata.title
-        team.text = nft.metadata.topShotPlay.stats.teamAtMoment
+        team.text = nft.metadata.top_shot_play.stats.team_at_moment
 
         loadImage(nft.metadata.image)
             .subscribeOn(Schedulers.io())
